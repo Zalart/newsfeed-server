@@ -1,15 +1,16 @@
-const http = require('http');
+const dotenv = require('dotenv');
 
-const express = require('express');
+const expressService = require('./services/express.service');
+const sequelizeService = require('./services/sequelize.service');
 
-const app = express();
+dotenv.config();
 
-const authRoutes = require('./routes/auth');
-const publicationRoutes = require('./routes/publication');
-
-app.use('/auth', authRoutes);
-app.use('/feed', publicationRoutes);
-
-const server = http.createServer(app)
-
-server.listen(3000)
+(async () => {
+    try {
+        await expressService.init();
+        await sequelizeService.init();
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+})()

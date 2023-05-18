@@ -20,7 +20,6 @@ const sequelizeService = {
             // then associate them
             modelFiles.map(async(file) => {
                 const model = await import(`../models/${file}`);
-                console.log(sequelize.models)
                 model.default.associate && model.default.associate(sequelize.models);
             })
 

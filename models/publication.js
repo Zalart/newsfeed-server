@@ -7,8 +7,8 @@ class Publication extends Model {
                 id: {
                     type: DataTypes.UUID,
                     allowNull: false,
-                    primaryKey: true,
-                    defaultValue: DataTypes.UUIDV4
+                    defaultValue: DataTypes.UUIDV4,
+                    primaryKey: true
                 },
                 date: {
                     type: DataTypes.DATE,
@@ -35,10 +35,6 @@ class Publication extends Model {
                 //     type: DataTypes.JSON,
                 //     allowNull: true
                 // },
-                creatorId: {
-                    type: DataTypes.STRING,
-                    allowNull: false
-                },
                 // uri: {
                 //     type: DataTypes.STRING,
                 //     allowNull: false
@@ -57,7 +53,7 @@ class Publication extends Model {
         return this;
     }
     static associate(models) {
-
+        this.belongsTo(models.User);
     }
 }
 

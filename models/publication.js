@@ -7,11 +7,13 @@ class Publication extends Model {
                 id: {
                     type: DataTypes.UUID,
                     allowNull: false,
-                    primaryKey: true
+                    primaryKey: true,
+                    defaultValue: DataTypes.UUIDV4
                 },
                 date: {
                     type: DataTypes.DATE,
-                    allowNull: false
+                    allowNull: false,
+                    defaultValue: DataTypes.NOW
                 },
                 title: {
                     type: DataTypes.STRING,
@@ -29,20 +31,21 @@ class Publication extends Model {
                     type: DataTypes.STRING,
                     allowNull: false
                 },
-                tags: {
-                    type: DataTypes.JSON,
-                    allowNull: true
-                },
+                // tags: {
+                //     type: DataTypes.JSON,
+                //     allowNull: true
+                // },
                 creatorId: {
                     type: DataTypes.STRING,
                     allowNull: false
                 },
-                uri: {
-                    type: DataTypes.STRING,
-                    allowNull: false
-                },
+                // uri: {
+                //     type: DataTypes.STRING,
+                //     allowNull: false
+                // },
                 active: {
                     type: DataTypes.BOOLEAN,
+                    defaultValue: true,
                     allowNull: false
                 }
             },

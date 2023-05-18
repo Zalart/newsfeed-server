@@ -1,5 +1,6 @@
 const express = require('express');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
 const routeFiles = fs
     .readdirSync(__dirname + '/../routes/')
@@ -18,6 +19,7 @@ const expressService = {
             }
 
             server = express();
+            server.use(bodyParser.json());
             server.use(routes);
             server.listen(process.env.SERVER_PORT);
             console.log('[SUCCESS] Express server initialized on port:', process.env.SERVER_PORT);

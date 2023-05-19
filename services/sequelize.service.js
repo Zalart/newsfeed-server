@@ -20,10 +20,10 @@ const sequelizeService = {
             // then associate them
             modelFiles.map(async(file) => {
                 const model = await import(`../models/${file}`);
-                model.default.sequelize && model.default.associate(sequelize.models);
+                model.default.associate && model.default.associate(sequelize.models);
             })
 
-            await sequelize.sync();
+            await sequelize.sync({force: true});
 
             console.log("[SEQUELIZE] Database service initialized");
         } catch (error) {

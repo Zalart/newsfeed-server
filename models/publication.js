@@ -55,6 +55,7 @@ class Publication extends Model {
     static associate(models) {
         this.belongsTo(models.User);
         this.belongsTo(models.Category)
+        this.belongsToMany(models.Tag, { through: 'PublicationTags'})
     }
 }
 

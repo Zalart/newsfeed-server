@@ -2,8 +2,9 @@ const Publication = require('../models/publication');
 const Tag = require('../models/tag');
 const Category = require('../models/category');
 
+// publication CRUD
 exports.addPublication = (req, res) => {
-    const { title, teaser, content, category, creatorId } = req.body;
+    const {title, teaser, content, category, creatorId} = req.body;
     Publication.create({
         title,
         teaser,
@@ -17,38 +18,55 @@ exports.addPublication = (req, res) => {
         .catch(error => console.log(error))
 }
 
-// tag methods
+exports.updatePublication = (req, res) => {
+    const {title, date, teaser, content, active} = req.body;
+    const publicationId = req.params.publicationId;
+    Publication.update(
+        {
+            title,
+            date,
+            teaser,
+            content,
+            active
+        },
+        {
+            where: {
+                id: publicationId
+            }
+        })
+        .then(result => {
+            res.status(200).json({message: 'Publication updated'})
+            console.log(result)
+        })
+        .catch(error => console.log(error))
+}
+
+exports.deletePublication = (req, res) => {
+    const publicationId = req.params.publicationId;
+    Publication.destroy({
+        where: {
+            id: publicationId
+        }
+    })
+        .then(() => {
+            res.status(200).json({message: 'Publication deleted'})
+        })
+        .catch(error => console.log(error))
+}
+
+// tag CRUD
 exports.addTag = (req, res) => {
-    const { title } = req.body;
+    const {title} = req.body;
     Tag.create({
         title
-    }) .then(() => {
+    }).then(() => {
         res.status(201).json({message: 'Tag created'})
     })
         .catch(error => console.log(error))
 }
 
-exports.getTags = (req, res) => {
-    Tag.findAll({
-        attributes: ['id', 'title']
-    })
-        .then(result => {
-            res.status(200).json({tags: result})
-        })
-        .catch(error => console.log(error))
-}
-
-exports.getTag = (req,res) => {
-    const tagId = req.params.tagId;
-    Tag.findByPk(tagId)
-        .then(result => {
-            res.status(200).json({result})
-        })
-        .catch(error => console.log(error))
-}
-
 exports.updateTag = (req, res) => {
-    const { title } = req.body;
+    const {title} = req.body;
     const tagId = req.params.tagId;
     Tag.update(
         {title: title},
@@ -77,38 +95,19 @@ exports.deleteTag = (req, res) => {
         .catch(error => console.log(error))
 }
 
-// category methods
+// category CRUD
 exports.addCategory = (req, res) => {
-    const { title } = req.body;
+    const {title} = req.body;
     Category.create({
         title
-    }) .then(() => {
+    }).then(() => {
         res.status(201).json({message: 'Category created'})
     })
         .catch(error => console.log(error))
 }
 
-exports.getCategories = (req, res) => {
-    Category.findAll({
-        attributes: ['id', 'title']
-    })
-        .then(result => {
-            res.status(200).json({categories: result})
-        })
-        .catch(error => console.log(error))
-}
-
-exports.getCategory = (req,res) => {
-    const categoryId = req.params.categoryId;
-    Category.findByPk(categoryId)
-        .then(result => {
-            res.status(200).json({result})
-        })
-        .catch(error => console.log(error))
-}
-
 exports.updateCategory = (req, res) => {
-    const { title } = req.body;
+    const {title} = req.body;
     const categoryId = req.params.categoryId;
     Category.update(
         {title: title},
@@ -116,7 +115,7 @@ exports.updateCategory = (req, res) => {
             where: {
                 id: categoryId
             }
-    })
+        })
         .then(result => {
             res.status(200).json({message: 'Category updated'})
             console.log(result)

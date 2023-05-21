@@ -23,7 +23,7 @@ const sequelizeService = {
                 model.default.associate && model.default.associate(sequelize.models);
             })
 
-            await sequelize.sync({force: true});
+            // await sequelize.sync({force: true});
 
             console.log("[SEQUELIZE] Database service initialized");
         } catch (error) {

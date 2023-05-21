@@ -6,7 +6,7 @@ const feedController = require('../controllers/feed');
 
 // publication routes
 router.get('/publication', feedController.getPublications);
-router.get('/publication/publicationId', feedController.getPublication);
+router.get('/publication/:publicationId', feedController.getPublication);
 
 // category routes
 router.get('/category', feedController.getCategories);

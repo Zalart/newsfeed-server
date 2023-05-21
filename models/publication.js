@@ -27,18 +27,6 @@ class Publication extends Model {
                     type: DataTypes.TEXT,
                     allowNull: false
                 },
-                category: {
-                    type: DataTypes.STRING,
-                    allowNull: false
-                },
-                // tags: {
-                //     type: DataTypes.JSON,
-                //     allowNull: true
-                // },
-                // uri: {
-                //     type: DataTypes.STRING,
-                //     allowNull: false
-                // },
                 active: {
                     type: DataTypes.BOOLEAN,
                     defaultValue: true,

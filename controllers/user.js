@@ -12,7 +12,7 @@ exports.getUsers = (req,res) => {
 }
 
 exports.getUser = (req, res) => {
-    const { userId } = req.body;
+    const userId  = req.params.userId;
     User.findByPk(userId)
         .then(result => {
             res.status(201).json({result})
@@ -59,7 +59,7 @@ exports.updateUser = (req, res) => {
 }
 
 exports.deleteUser = (req, res) => {
-    const { userId } = req.body;
+    const userId = req.params.userId;
     User.destroy({
         where: {
             id: userId
